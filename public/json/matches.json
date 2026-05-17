@@ -1,0 +1,100 @@
+{
+  "groups": {
+    "A": [
+      { "id": "A1-A2", "home": "A1", "away": "A2" },
+      { "id": "A3-A4", "home": "A3", "away": "A4" },
+      { "id": "A1-A3", "home": "A1", "away": "A3" },
+      { "id": "A2-A4", "home": "A2", "away": "A4" },
+      { "id": "A1-A4", "home": "A1", "away": "A4" },
+      { "id": "A2-A3", "home": "A2", "away": "A3" }
+    ],
+    "B": [
+      { "id": "B1-B2", "home": "B1", "away": "B2" },
+      { "id": "B3-B4", "home": "B3", "away": "B4" },
+      { "id": "B1-B3", "home": "B1", "away": "B3" },
+      { "id": "B2-B4", "home": "B2", "away": "B4" },
+      { "id": "B1-B4", "home": "B1", "away": "B4" },
+      { "id": "B2-B3", "home": "B2", "away": "B3" }
+    ],
+    "C": [
+      { "id": "C1-C2", "home": "C1", "away": "C2" },
+      { "id": "C3-C4", "home": "C3", "away": "C4" },
+      { "id": "C1-C3", "home": "C1", "away": "C3" },
+      { "id": "C2-C4", "home": "C2", "away": "C4" },
+      { "id": "C1-C4", "home": "C1", "away": "C4" },
+      { "id": "C2-C3", "home": "C2", "away": "C3" }
+    ],
+    "D": [
+      { "id": "D1-D2", "home": "D1", "away": "D2" },
+      { "id": "D3-D4", "home": "D3", "away": "D4" },
+      { "id": "D1-D3", "home": "D1", "away": "D3" },
+      { "id": "D2-D4", "home": "D2", "away": "D4" },
+      { "id": "D1-D4", "home": "D1", "away": "D4" },
+      { "id": "D2-D3", "home": "D2", "away": "D3" }
+    ],
+    "E": [
+      { "id": "E1-E2", "home": "E1", "away": "E2" },
+      { "id": "E3-E4", "home": "E3", "away": "E4" },
+      { "id": "E1-E3", "home": "E1", "away": "E3" },
+      { "id": "E2-E4", "home": "E2", "away": "E4" },
+      { "id": "E1-E4", "home": "E1", "away": "E4" },
+      { "id": "E2-E3", "home": "E2", "away": "E3" }
+    ],
+    "F": [
+      { "id": "F1-F2", "home": "F1", "away": "F2" },
+      { "id": "F3-F4", "home": "F3", "away": "F4" },
+      { "id": "F1-F3", "home": "F1", "away": "F3" },
+      { "id": "F2-F4", "home": "F2", "away": "F4" },
+      { "id": "F1-F4", "home": "F1", "away": "F4" },
+      { "id": "F2-F3", "home": "F2", "away": "F3" }
+    ],
+    "G": [
+      { "id": "G1-G2", "home": "G1", "away": "G2" },
+      { "id": "G3-G4", "home": "G3", "away": "G4" },
+      { "id": "G1-G3", "home": "G1", "away": "G3" },
+      { "id": "G2-G4", "home": "G2", "away": "G4" },
+      { "id": "G1-G4", "home": "G1", "away": "G4" },
+      { "id": "G2-G3", "home": "G2", "away": "G3" }
+    ],
+    "H": [
+      { "id": "H1-H2", "home": "H1", "away": "H2" },
+      { "id": "H3-H4", "home": "H3", "away": "H4" },
+      { "id": "H1-H3", "home": "H1", "away": "H3" },
+      { "id": "H2-H4", "home": "H2", "away": "H4" },
+      { "id": "H1-H4", "home": "H1", "away": "H4" },
+      { "id": "H2-H3", "home": "H2", "away": "H3" }
+    ],
+    "I": [
+      { "id": "I1-I2", "home": "I1", "away": "I2" },
+      { "id": "I3-I4", "home": "I3", "away": "I4" },
+      { "id": "I1-I3", "home": "I1", "away": "I3" },
+      { "id": "I2-I4", "home": "I2", "away": "I4" },
+      { "id": "I1-I4", "home": "I1", "away": "I4" },
+      { "id": "I2-I3", "home": "I2", "away": "I3" }
+    ],
+    "J": [
+      { "id": "J1-J2", "home": "J1", "away": "J2" },
+      { "id": "J3-J4", "home": "J3", "away": "J4" },
+      { "id": "J1-J3", "home": "J1", "away": "J3" },
+      { "id": "J2-J4", "home": "J2", "away": "J4" },
+      { "id": "J1-J4", "home": "J1", "away": "J4" },
+      { "id": "J2-J3", "home": "J2", "away": "J3" }
+    ],
+    "K": [
+      { "id": "K1-K2", "home": "K1", "away": "K2" },
+      { "id": "K3-K4", "home": "K3", "away": "K4" },
+      { "id": "K1-K3", "home": "K1", "away": "K3" },
+      { "id": "K2-K4", "home": "K2", "away": "K4" },
+      { "id": "K1-K4", "home": "K1", "away": "K4" },
+      { "id": "K2-K3", "home": "K2", "away": "K3" }
+    ],
+    "L": [
+      { "id": "L1-L2", "home": "L1", "away": "L2" },
+      { "id": "L3-L4", "home": "L3", "away": "L4" },
+      { "id": "L1-L3", "home": "L1", "away": "L3" },
+      { "id": "L2-L4", "home": "L2", "away": "L4" },
+      { "id": "L1-L4", "home": "L1", "away": "L4" },
+      { "id": "L2-L3", "home": "L2", "away": "L3" }
+    ]
+  }
+}
