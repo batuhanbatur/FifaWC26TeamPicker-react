@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import MatchCard from "./MatchCard"
 
 export default function GroupStage() {
   const [groups, setGroups] = useState({})
@@ -54,7 +55,7 @@ export default function GroupStage() {
 
         </div>
       )}
-
+    <MatchCard currentGroup={currentGroup}/>
     </div>
   )
 }
