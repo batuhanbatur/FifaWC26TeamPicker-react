@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import { flagUrl } from "../../utils/flagUrl"
 
 const SCORE_OPTIONS = ["1-0","2-0","2-1","3-0","3-1","3-2","0-0","0-1","0-2","1-2","0-3","1-3","2-3"]
 const DOUBLE_DIGIT_DELAY = 700
@@ -55,7 +56,7 @@ export default function MatchCard({ homeTeam, awayTeam, matchLabel, onScoreSubmi
 
       <div className="match-card">
         <div className="match-team">
-          <img className="team-flag" src={`/flags/${homeTeam.flag}.svg`} alt={homeTeam.name} />
+          <img className="team-flag" src={flagUrl(homeTeam.flag)} alt={homeTeam.name} />
           <span className="team-name">{homeTeam.name}</span>
           <input
             className="goal-input"
@@ -91,7 +92,7 @@ export default function MatchCard({ homeTeam, awayTeam, matchLabel, onScoreSubmi
             onChange={e => handleGoalInput(e.target.value, setAwayGoals)}
           />
           <span className="team-name">{awayTeam.name}</span>
-          <img className="team-flag" src={`/flags/${awayTeam.flag}.svg`} alt={awayTeam.name} />
+          <img className="team-flag" src={flagUrl(awayTeam.flag)} alt={awayTeam.name} />
         </div>
       </div>
 

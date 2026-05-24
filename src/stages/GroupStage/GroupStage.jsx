@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import MatchCard from "./MatchCard"
 import { POINTS } from "../../../constants/points"
+import { flagUrl } from "../../utils/flagUrl"
 
 const MATCHES_PER_GROUP = 6
 
@@ -164,7 +165,7 @@ export default function GroupStage({ onComplete }) {
             <div key={team.id} className="team-row">
               <div className="team-info">
                 <span className="team-pos">{i + 1}</span>
-                <img className="team-flag" src={`/flags/${team.flag}.svg`} alt={team.name} />
+                <img className="team-flag" src={flagUrl(team.flag)} alt={team.name} />
                 <span className="team-name">{team.name}</span>
               </div>
               <div className="team-stats">

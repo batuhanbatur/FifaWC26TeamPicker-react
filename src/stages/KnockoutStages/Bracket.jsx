@@ -1,5 +1,6 @@
 import { useMemo } from "react"
 import { STAGE_LABELS } from "../../../constants/stageLabels"
+import { flagUrl } from "../../utils/flagUrl"
 
 // DFS pre-order from the final match outward.
 // Produces { id, depth } entries where depth 1=SF, 2=QF, 3=L16, 4=L32.
@@ -119,7 +120,7 @@ function BracketTeam({ name, won, flagMap }) {
   return (
     <div className={`bm-team${won ? " bm-team--won" : ""}`}>
       {flag
-        ? <img className="bm-flag" src={`/flags/${flag}.svg`} alt="" />
+        ? <img className="bm-flag" src={flagUrl(flag)} alt="" />
         : <span className="bm-flag-ph" />
       }
       <span className="bm-name">{name || "TBD"}</span>

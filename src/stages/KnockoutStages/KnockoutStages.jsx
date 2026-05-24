@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { stageOrder } from "../../../constants/stageOrder"
 import { STAGE_LABELS } from "../../../constants/stageLabels"
 import Bracket from "./Bracket"
+import { flagUrl } from "../../utils/flagUrl"
 
 function assignBestThirds(last32Matches, bestThirds) {
   const slots = []
@@ -144,12 +145,12 @@ export default function KnockoutStages({ groupResults, bestThirds }) {
           </p>
           <div className="knockout-buttons">
             <button className="knockout-btn" onClick={() => handleWinner(currentMatch.home)}>
-              {homeFlag && <img className="knockout-flag" src={`/flags/${homeFlag}.svg`} alt="" />}
+              {homeFlag && <img className="knockout-flag" src={flagUrl(homeFlag)} alt="" />}
               {currentMatch.home}
             </button>
             <span className="vs-label">vs</span>
             <button className="knockout-btn" onClick={() => handleWinner(currentMatch.away)}>
-              {awayFlag && <img className="knockout-flag" src={`/flags/${awayFlag}.svg`} alt="" />}
+              {awayFlag && <img className="knockout-flag" src={flagUrl(awayFlag)} alt="" />}
               {currentMatch.away}
             </button>
           </div>
