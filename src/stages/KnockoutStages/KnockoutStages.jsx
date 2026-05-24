@@ -40,7 +40,7 @@ export default function KnockoutStages({ groupResults, bestThirds }) {
   const [champion, setChampion]               = useState(null)
 
   useEffect(() => {
-    fetch("/json/knockout.json").then(r => r.json()).then(setKnockoutData)
+    fetch(`${import.meta.env.BASE_URL}json/knockout.json`).then(r => r.json()).then(setKnockoutData)
   }, [])
 
   const bestThirdAssignment = useMemo(() => {

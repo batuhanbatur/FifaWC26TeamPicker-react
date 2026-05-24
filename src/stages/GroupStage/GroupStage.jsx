@@ -34,8 +34,8 @@ export default function GroupStage({ onComplete }) {
 
   useEffect(() => {
     Promise.all([
-      fetch("/json/groups.json").then(r => r.json()),
-      fetch("/json/matches.json").then(r => r.json()),
+      fetch(`${import.meta.env.BASE_URL}json/groups.json`).then(r => r.json()),
+      fetch(`${import.meta.env.BASE_URL}json/matches.json`).then(r => r.json()),
     ]).then(([groupsData, matchesData]) => {
       const g = groupsData.groups
       const flat = g.flatMap(group => {
