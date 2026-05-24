@@ -1,71 +1,127 @@
-import { useEffect, useState } from "react"
+import { useRef, useState } from "react"
 
-export default function MatchCard({ currentGroup }) {
-  if (!currentGroup) {
-    return null
+const SCORE_OPTIONS = ["1-0","2-0","2-1","3-0","3-1","3-2","0-0","0-1","0-2","1-2","0-3","1-3","2-3"]
+const DOUBLE_DIGIT_DELAY = 700
+
+export default function MatchCard({ homeTeam, awayTeam, matchLabel, onScoreSubmit }) {
+  const [homeGoals, setHomeGoals] = useState("")
+  const [awayGoals, setAwayGoals] = useState("")
+  const [selectedScore, setSelectedScore] = useState(null)
+  const [showQuickScores, setShowQuickScores] = useState(true)
+
+  const awayInputRef = useRef(null)
+  const focusTimerRef = useRef(null)
+
+  const commit = (h, a, scoreStr) => {
+    setSelectedScore(scoreStr)
+    setTimeout(() => onScoreSubmit(h, a), 400)
   }
 
-  const [matches, setMatches] = useState({})
-  const [currentMatchIndex, setCurrentMatchIndex] = useState(0)
-
-  useEffect(() => {
-    fetch("/json/matches.json")
-      .then(res => res.json())
-      .then(matchesData => {
-        setMatches(matchesData)
-      })
-  }, [])
-
-  const currentGroupLetter = currentGroup.name.split(" ")[1]
-
-  const currentGroupMatches = matches.groups?.[currentGroupLetter] || []
-
-  const resolveTeam = teamId => {
-    return currentGroup.teams.find(team => team.id === teamId)
+  const handleManualSubmit = () => {
+    if (homeGoals === "" || awayGoals === "") return
+    commit(homeGoals, awayGoals, `${homeGoals}-${awayGoals}`)
   }
+
+  const handleGoalInput = (val, setter) => {
+    if (val === "") { setter(""); return }
+    const n = parseInt(val)
+    if (Number.isInteger(n) && n >= 0 && n <= 20) setter(String(n))
+  }
+
+  const handleHomeGoalInput = (val) => {
+    handleGoalInput(val, setHomeGoals)
+    clearTimeout(focusTimerRef.current)
+
+    if (val === "") return
+    const n = parseInt(val)
+    if (!Number.isInteger(n) || n < 0 || n > 20) return
+
+    // Two digits already entered — move immediately, no more digits expected
+    if (String(n).length >= 2) {
+      awayInputRef.current?.focus()
+    } else {
+      // Single digit — wait in case user types a second digit (e.g. "1" → "10")
+      focusTimerRef.current = setTimeout(() => {
+        awayInputRef.current?.focus()
+      }, DOUBLE_DIGIT_DELAY)
+    }
+  }
+
+  const manualReady = homeGoals !== "" && awayGoals !== ""
 
   return (
     <div className="matches-container">
-      <h2 className="matches-title">
-        {currentGroup.name} Matches
-      </h2>
+      <h2 className="matches-title">{matchLabel}</h2>
 
-      {currentGroupMatches[currentMatchIndex] && (() => {
-        const currentMatch = currentGroupMatches[currentMatchIndex]
+      <div className="match-card">
+        <div className="match-team">
+          <img className="team-flag" src={`/flags/${homeTeam.flag}.svg`} alt={homeTeam.name} />
+          <span className="team-name">{homeTeam.name}</span>
+          <input
+            className="goal-input"
+            type="number"
+            min="0"
+            max="20"
+            placeholder="–"
+            value={homeGoals}
+            onChange={e => handleHomeGoalInput(e.target.value)}
+          />
+        </div>
 
-        const homeTeam = resolveTeam(currentMatch.home)
-        const awayTeam = resolveTeam(currentMatch.away)
+        <div className="match-center">
+          <div className="match-vs">VS</div>
+          <button
+            className={`submit-btn ${manualReady ? "submit-btn--ready" : ""} ${selectedScore ? "submit-btn--done" : ""}`}
+            onClick={handleManualSubmit}
+            disabled={!!selectedScore}
+          >
+            {selectedScore ? "✓" : "Confirm"}
+          </button>
+        </div>
 
-        return (
-          <div className="match-card">
-            <div className="match-team">
-              <img
-                className="team-flag"
-                src={`/flags/${homeTeam.flag}.svg`}
-              />
+        <div className="match-team match-team--away">
+          <input
+            ref={awayInputRef}
+            className="goal-input"
+            type="number"
+            min="0"
+            max="20"
+            placeholder="–"
+            value={awayGoals}
+            onChange={e => handleGoalInput(e.target.value, setAwayGoals)}
+          />
+          <span className="team-name">{awayTeam.name}</span>
+          <img className="team-flag" src={`/flags/${awayTeam.flag}.svg`} alt={awayTeam.name} />
+        </div>
+      </div>
 
-              <span>
-                {homeTeam.name}
-              </span>
-            </div>
+      <button
+        className="quick-scores-toggle"
+        onClick={() => setShowQuickScores(v => !v)}
+        disabled={!!selectedScore}
+      >
+        Quick Scores {showQuickScores ? "▲" : "▼"}
+      </button>
 
-            <div className="match-vs">
-              VS
-            </div>
-
-            <div className="match-team">
-              <img
-                className="team-flag"
-                src={`/flags/${awayTeam.flag}.svg`}
-              />
-
-              <span>
-                {awayTeam.name}
-              </span>
-            </div>
+      {showQuickScores && (
+        <div className="score-tray">
+          <div className="score-buttons">
+            {SCORE_OPTIONS.map(score => {
+              const [h, a] = score.split("-")
+              return (
+                <button
+                  key={score}
+                  className={`score-btn ${selectedScore === score ? "score-btn--selected" : ""}`}
+                  onClick={() => commit(h, a, score)}
+                  disabled={!!selectedScore}
+                >
+                  {score}
+                </button>
+              )
+            })}
           </div>
-        )
-      })()}
+        </div>
+      )}
     </div>
   )
 }

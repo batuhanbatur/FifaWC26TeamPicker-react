@@ -1,50 +1,568 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 32px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #111;
-  color: white;
+  color: #fff;
 }
 
-.groups-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-  justify-content: center;
+button {
+  font: inherit;
+  cursor: pointer;
 }
 
-.group-card {
-  background-color: #1b1b1b;
-  border-radius: 12px;
-  padding: 1.5rem;
-  width: 300px;
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-.group-title {
+/* ── App ── */
+
+.app-title {
   text-align: center;
-  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: #aaa;
+}
+
+/* ── Group Stage layout ── */
+
+.group-stage-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ── Group Sidebar ── */
+
+.group-sidebar {
+  width: 148px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.group-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background: #1e1e1e;
+  color: #ccc;
+  border: 1px solid #333;
+  border-radius: 6px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.group-btn:hover:not(:disabled) {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.group-btn--viewing {
+  border-color: #666;
+  color: #fff;
+}
+
+.group-btn--active {
+  border-color: #fff;
+  color: #fff;
+  font-weight: 700;
+}
+
+.group-btn--done {
+  color: #888;
+}
+
+.tick {
+  color: #4caf50;
+  font-size: 0.8rem;
+}
+
+/* ── Group Main ── */
+
+.group-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Standings ── */
+
+.standings-card {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+
+.standings-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
 }
 
 .team-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  padding: 8px 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.team-row:last-child {
+  border-bottom: none;
 }
 
 .team-info {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+}
+
+.team-pos {
+  width: 16px;
+  font-size: 0.85rem;
+  color: #888;
 }
 
 .team-flag {
-  width: 24px;
+  width: 26px;
   height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.team-name {
+  font-size: 0.9rem;
 }
 
 .team-stats {
   display: flex;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.pts {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Match Card ── */
+
+.matches-container {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.matches-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.match-counter {
+  font-size: 0.8rem;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 2px 8px;
+  color: #aaa;
+}
+
+.match-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.match-team {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.match-team--away {
+  flex-direction: row-reverse;
+}
+
+.goal-input {
+  width: 52px;
+  padding: 6px 8px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.goal-input::-webkit-outer-spin-button,
+.goal-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.goal-input:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.match-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.match-vs {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.submit-btn {
+  padding: 8px 16px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 0.85rem;
+  min-width: 72px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #333;
+  color: #fff;
+}
+
+.submit-btn--ready {
+  border-color: #fff;
+  color: #fff;
+  background: #222;
+}
+
+.submit-btn--done {
+  background: #2e7d32;
+  border-color: #2e7d32;
+  color: #fff;
+}
+
+/* ── Quick-score tray ── */
+
+.quick-scores-toggle {
+  align-self: flex-start;
+  padding: 6px 14px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 0.8rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.quick-scores-toggle:hover:not(:disabled) {
+  background: #333;
+  color: #fff;
+}
+
+.score-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.score-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.score-btn {
+  padding: 5px 10px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #ccc;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.score-btn:hover:not(:disabled) {
+  background: #333;
+  border-color: #888;
+  color: #fff;
+}
+
+.score-btn--selected {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+}
+
+/* ── Knockout Stages ── */
+
+.knockout-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Tournament Bracket ── */
+
+/*
+  Slot alignment:
+  --bs = base slot height (one L32 match + surrounding gap).
+  Each deeper round gets 2× the slot height so match centres align perfectly.
+  8 L32 slots per side → total bracket height = 8 × --bs
+*/
+:root { --bs: 68px; }
+
+.bracket-scroll {
+  overflow-x: auto;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.bracket {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  min-width: max-content;
+}
+
+/* ── Bracket Column ── */
+
+.bc {
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+}
+
+.bc--final {
+  min-width: 148px;
+}
+
+.bc-label {
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+  padding: 0 4px 6px;
+  white-space: nowrap;
+}
+
+.bc-matches {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ── Bracket Slots ── */
+/* Each slot height = 2^(4-depth) × base slot */
+
+.bc-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.bc-slot--d4    { height: var(--bs); }
+.bc-slot--d3    { height: calc(2 * var(--bs)); }
+.bc-slot--d2    { height: calc(4 * var(--bs)); }
+.bc-slot--d1    { height: calc(8 * var(--bs)); }
+.bc-slot--final { height: calc(8 * var(--bs)); }
+
+/* ── Bracket Match Card ── */
+
+.bm {
+  width: 118px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.4;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.bm--done  { opacity: 0.75; }
+.bm--active {
+  opacity: 1;
+  border-color: #fff;
+  box-shadow: 0 0 0 1px #fff;
+}
+.bm--tbd   { opacity: 0.2; }
+
+/* ── Bracket Team Row ── */
+
+.bm-team {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 6px;
+  border-bottom: 1px solid #222;
+}
+
+.bm-team:last-child {
+  border-bottom: none;
+}
+
+.bm-team--won {
+  background: #1e2e1e;
+}
+
+.bm-flag {
+  width: 18px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.bm-flag-ph {
+  display: inline-block;
+  width: 18px;
+  height: 12px;
+  background: #2a2a2a;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.bm-name {
+  font-size: 0.68rem;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 72px;
+}
+
+.bm-team--won .bm-name {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── Match picker (knockout) ── */
+
+.match-picker {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.match-counter {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.knockout-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.knockout-btn {
+  min-width: 160px;
+  padding: 12px 20px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.knockout-btn:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+}
+
+.knockout-flag {
+  width: 26px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.vs-label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+}
+
+/* ── Champion screen ── */
+
+.champion-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.champion-trophy {
+  font-size: 5rem;
+}
+
+.champion-label {
+  font-size: 1.1rem;
+  color: #aaa;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.champion-name {
+  font-size: 3rem;
+  font-weight: 700;
 }
